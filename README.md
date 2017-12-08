@@ -1,2 +1,2 @@
 # gozip
-Zip up a directory
+- cli tool to zip up a directory
