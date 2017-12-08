@@ -8,14 +8,19 @@ import (
 )
 
 func main() {
-	searchDir := "."
+	var searchDir string
+	if len(os.Args) > 1 {
+		searchDir = os.Args[1]
+	} else {
+		searchDir = "."
+	}
 	var files []string
 	filepath.Walk(searchDir, func(path string, f os.FileInfo, err error) error {
 		if f.Name() == ".git" || f.Name() == ".." || f.Name() == "output.zip" {
 			return filepath.SkipDir
 		}
-		if f.Name() != "." {
-			files = append(files, f.Name())
+		if f.Name() != "." && !f.IsDir() {
+			files = append(files, path)
 		}
 		return nil
 	})
